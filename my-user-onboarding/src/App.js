@@ -16,6 +16,7 @@ const initialErrors = {
   name: '',
   email: '',
   password: '',
+  termsOfService: ''
 }
 const initialUsers = [];
 const initialDisabled = true;
@@ -27,15 +28,28 @@ function App() {
   const [errors, setErrors] = useState(initialErrors);
   const [disabled, setDisabled] = useState(initialDisabled);
 
-  // const getUsers = () => {
-  //   axios.get('https://reqres.in/api/users')
-  //     .then(res => {
-  //         console.log(res.data)
-  //     })
-  //     .catch(err => {
-  //         console.log(err);
-  //     })
-  // }
+  const getUsers = () => {
+    axios.get('https://reqres.in/api/users')
+      .then(res => {
+          console.log(res.data);
+          setUsers([res.data, ...users]);
+          setValues(initialValues);
+      })
+      .catch(err => {
+          console.log(err);
+      })
+  }
+
+  const postUsers = newUser => {
+    axios.post('https://reqres.in/api/users', newUser)
+      .then(res => {
+        console.log(res.data);
+      })
+      .catch(err => {
+        console.log(err);
+      })
+  }
+
   const run = (name, value) => {
   yup.reach(Schema, name)
   .validate(value)
@@ -48,6 +62,20 @@ function App() {
     setValues({...values, [name]: value })
   }
 
+  const submitAndGo = () => {
+    const newUser = {
+      username: values.username.trim(),
+      email: values.email.trim(),
+      role: values.password.trim(),
+      termsOfService: values.termsOfService
+    }
+    postUsers(newUser);
+  }
+
+  useEffect(() => {
+    getUsers()
+  }, [])
+
   useEffect(() => {
     Schema.isValid(values).then(valid => setDisabled(!valid));
   }, [values])
@@ -59,7 +87,7 @@ function App() {
         values={values}
         poof={inputPoof}
         errors={errors}
-        // submit={}
+        submit={submitAndGo}
         disabled={disabled}
       />
     </div>
