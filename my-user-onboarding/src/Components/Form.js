@@ -14,9 +14,9 @@ function Form(props) {
         <form>
             <div className="container">
                 <div className='errorList'>
-                    {/* <h3>{errors.name}</h3>
+                    <h3>{errors.name}</h3>
                     <h3>{errors.email}</h3>
-                    <h3>{errors.password}</h3> */}
+                    <h3>{errors.password}</h3>
                 </div>
                 <label>Name:
                     <input 
@@ -36,7 +36,7 @@ function Form(props) {
                 </label>
                 <label>Password:
                     <input 
-                        name="name"
+                        name="password"
                         type="text"
                         value={values.password}
                         onChange={onPoof}
@@ -44,8 +44,8 @@ function Form(props) {
                 </label>
                 <label>Terms of Service (check if you agree):
                     <input 
-                        name="name"
-                        type="text"
+                        name="termsOfService"
+                        type="checkbox"
                         checked={values.termsOfService}
                         onChange={onPoof}
                     />

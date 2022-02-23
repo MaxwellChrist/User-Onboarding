@@ -36,15 +36,25 @@ function App() {
   //         console.log(err);
   //     })
   // }
-  
+  const run = (name, value) => {
+  yup.reach(Schema, name)
+  .validate(value)
+  .then(() => setErrors({...errors, [name]: ''}))
+  .catch(err => setErrors({...errors, [name]: err.errors[0]}))
+}
+
+  const inputPoof = ( name, value ) => {
+    run(name, value);
+    setValues({...values, [name]: value })
+  }
 
   return (
     <div className="App">
       <h1>Welcome New Users!</h1>
       <Form 
         values={values}
-        // poof={inputPoof}
-        error={errors}
+        poof={inputPoof}
+        errors={errors}
         // submit={}
         disabled={disabled}
       />

@@ -12,13 +12,11 @@ const Schema = yup.object().shape({
         .required("A valid email address is required. Please enter your email."),
     password: yup
         .string()
-        .password("Please enter a valid password")
         .required("Your password is required. Please enter a password.")
-        .min(6, "Your password must contain at least 8 characters. Please try again.")
-        .max(20, "Your password cannot exceed 20 characters. Please try again")
-        .minUppercase(2, "Your password has to contain at least two uppercase letters. Please try again.")
-        .minLowercase(2, "Your password has to contain at least two lowercase letters. Please try again.")
-        .minNumbers(2, "Your password has to contain at least two numbers. Please try again."),
+        .matches(
+            /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
+            "Your password must Contain 8 characters, one uppercase, one lowercase, one number and one special case character"
+          ),
     termsOfService: yup.boolean()
 })
 
