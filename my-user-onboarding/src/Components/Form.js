@@ -2,24 +2,28 @@ import React from 'react';
 
 function Form(props) {
 
-    const { values, change, errors, submit, disabled } = props;
+    const { values, poof, errors, submit, disabled } = props;
 
-    const poof = e => {
+    const onPoof = e => {
         const { name, type, value, checked } = e.target;
         const grabberValue = type === 'checkbox' ? checked : value;
-        change(name, grabberValue);
+        poof(name, grabberValue);
     }
-
 
     return (
         <form>
             <div className="container">
+                <div className='errorList'>
+                    {/* <h3>{errors.name}</h3>
+                    <h3>{errors.email}</h3>
+                    <h3>{errors.password}</h3> */}
+                </div>
                 <label>Name:
                     <input 
                         name="name"
                         type="text"
                         value={values.name}
-                        onChange={poof}
+                        onChange={onPoof}
                     />
                 </label>
                 <label>Email:
@@ -27,7 +31,7 @@ function Form(props) {
                         name="email"
                         type="text"
                         value={values.email}
-                        onChange={poof}
+                        onChange={onPoof}
                     />
                 </label>
                 <label>Password:
@@ -35,17 +39,18 @@ function Form(props) {
                         name="name"
                         type="text"
                         value={values.password}
-                        onChange={poof}
+                        onChange={onPoof}
                     />
                 </label>
                 <label>Terms of Service (check if you agree):
                     <input 
                         name="name"
                         type="text"
-                        value={values.termsOfService}
-                        onChange={poof}
+                        checked={values.termsOfService}
+                        onChange={onPoof}
                     />
                 </label>
+                <button type="submit" disabled={disabled}>Submit</button>
             </div>
         </form>
     )

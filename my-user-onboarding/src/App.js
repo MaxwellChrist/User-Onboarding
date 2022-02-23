@@ -26,14 +26,24 @@ function App() {
   const [errors, setErrors] = useState(initialErrors);
   const [disabled, setDisabled] = useState(initialDisabled);
 
+  // const getUsers = () => {
+  //   axios.get('https://reqres.in/api/users')
+  //     .then(res => {
+  //         console.log(res.data)
+  //     })
+  //     .catch(err => {
+  //         console.log(err);
+  //     })
+  // }
+  
 
   return (
     <div className="App">
       <h1>Welcome New Users!</h1>
       <Form 
         values={values}
-        // change={}
-        errors={errors}
+        // poof={inputPoof}
+        error={errors}
         // submit={}
         disabled={disabled}
       />
