@@ -17,7 +17,9 @@ const Schema = yup.object().shape({
             /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
             "Your password must Contain 8 characters, one uppercase, one lowercase, one number and one special case character"
           ),
-    termsOfService: yup.boolean()
+    termsOfService: yup
+        .boolean()
+        .oneOf([true], "You must agree to the terms of service. Please check the box.")
 })
 
 export default Schema;

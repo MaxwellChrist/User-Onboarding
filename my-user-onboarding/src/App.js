@@ -48,6 +48,10 @@ function App() {
     setValues({...values, [name]: value })
   }
 
+  useEffect(() => {
+    Schema.isValid(values).then(valid => setDisabled(!valid));
+  }, [values])
+
   return (
     <div className="App">
       <h1>Welcome New Users!</h1>

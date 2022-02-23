@@ -10,6 +10,11 @@ function Form(props) {
         poof(name, grabberValue);
     }
 
+    const onSubmit = e => {
+        e.preventDefault();
+        submit();
+    }
+
     return (
         <form>
             <div className="container">
