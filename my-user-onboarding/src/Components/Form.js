@@ -57,7 +57,7 @@ function Form(props) {
                         onChange={onChange}
                     />
                 </label>
-                <button type="submit">Submit</button>
+                <button type="submit" id="submitBtn">Submit</button>
             </div>
         </form>
     )
