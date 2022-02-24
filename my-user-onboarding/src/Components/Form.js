@@ -2,12 +2,13 @@ import React from 'react';
 
 function Form(props) {
 
-    const { values, poof, errors, submit, disabled } = props;
+    const { change, submit, errors, disabled } = props;
+    const { name, email, password, termsOfService } = props.values;
 
-    const onPoof = e => {
+    const onChange = e => {
         const { name, type, value, checked } = e.target;
         const grabberValue = type === 'checkbox' ? checked : value;
-        poof(name, grabberValue);
+        change(name, grabberValue);
     }
 
     const onSubmit = e => {
@@ -16,43 +17,44 @@ function Form(props) {
     }
 
     return (
-        <form>
+        <form onSubmit={onSubmit}>
             <div className="container">
                 <div className='errorList'>
                     <h3>{errors.name}</h3>
                     <h3>{errors.email}</h3>
                     <h3>{errors.password}</h3>
+                    <h3>{errors.termsOfService}</h3>
                 </div>
                 <label>Name:
                     <input 
                         name="name"
                         type="text"
-                        value={values.name}
-                        onChange={onPoof}
+                        value={name}
+                        onChange={onChange}
                     />
                 </label>
                 <label>Email:
                     <input 
                         name="email"
                         type="text"
-                        value={values.email}
-                        onChange={onPoof}
+                        value={email}
+                        onChange={onChange}
                     />
                 </label>
                 <label>Password:
                     <input 
                         name="password"
                         type="text"
-                        value={values.password}
-                        onChange={onPoof}
+                        value={password}
+                        onChange={onChange}
                     />
                 </label>
-                <label>Terms of Service (check if you agree):
+                <label>Terms of Service (need to agree in order to become a member):
                     <input 
                         name="termsOfService"
                         type="checkbox"
-                        checked={values.termsOfService}
-                        onChange={onPoof}
+                        checked={termsOfService}
+                        onChange={onChange}
                     />
                 </label>
                 <button type="submit" disabled={disabled}>Submit</button>

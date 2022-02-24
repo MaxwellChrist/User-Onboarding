@@ -28,22 +28,12 @@ function App() {
   const [errors, setErrors] = useState(initialErrors);
   const [disabled, setDisabled] = useState(initialDisabled);
 
-  const getUsers = () => {
-    axios.get('https://reqres.in/api/users')
+  const postUsers = () => {
+    axios.post('https://reqres.in/api/users', values)
       .then(res => {
-          console.log(res.data);
-          setUsers([res.data, ...users]);
-          setValues(initialValues);
-      })
-      .catch(err => {
-          console.log(err);
-      })
-  }
-
-  const postUsers = newUser => {
-    axios.post('https://reqres.in/api/users', newUser)
-      .then(res => {
-        console.log(res.data);
+        // console.log(res.data);
+        setUsers([res.data, ...users]);
+        setValues(initialUsers);
       })
       .catch(err => {
         console.log(err);
@@ -62,19 +52,16 @@ function App() {
     setValues({...values, [name]: value })
   }
 
-  const submitAndGo = () => {
-    const newUser = {
-      username: values.username.trim(),
+  const formSubmit = () => {
+    const newFriend = {
+      username: values.name.trim(),
       email: values.email.trim(),
-      role: values.password.trim(),
-      termsOfService: values.termsOfService
+      password: values.password.trim(),
+      termsOfService: values.termsOfService === true
     }
-    postUsers(newUser);
+    // 🔥 STEP 8- POST NEW FRIEND USING HELPER
+    postUsers(values);
   }
-
-  useEffect(() => {
-    getUsers()
-  }, [])
 
   useEffect(() => {
     Schema.isValid(values).then(valid => setDisabled(!valid));
@@ -85,11 +72,16 @@ function App() {
       <h1>Welcome New Users!</h1>
       <Form 
         values={values}
-        poof={inputPoof}
+        change={inputPoof}
         errors={errors}
-        submit={submitAndGo}
+        submit={postUsers}
         disabled={disabled}
       />
+      {users.map((u, index) => (
+        <div id={index}>
+          <p>{u.name} was created at {u.createdAt} with the email of {u.email}. Welcome aboard!</p>
+        </div>
+      ))}
     </div>
   );
 }
