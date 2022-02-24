@@ -1,8 +1,8 @@
 describe("Form_test App", () => {
     // commented this out since it couldn't find it running on 
-    // beforeEach(() => {
-    //     cy.visit("localhost:3000");
-    // })
+    beforeEach(() => {
+        cy.visit("localhost:3000");
+    })
 
     const nameInput = () => cy.get('input[name=name]');
     const emailInput = () => cy.get('input[name=email]');
