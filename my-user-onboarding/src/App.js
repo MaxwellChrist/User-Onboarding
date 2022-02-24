@@ -26,7 +26,7 @@ function App() {
   const [users, setUsers] = useState(initialUsers);
   const [values, setValues] = useState(initialValues);
   const [errors, setErrors] = useState(initialErrors);
-  const [disabled, setDisabled] = useState(initialDisabled);
+  // const [disabled, setDisabled] = useState(initialDisabled);
 
   const postUsers = () => {
     axios.post('https://reqres.in/api/users', values)
@@ -52,20 +52,9 @@ function App() {
     setValues({...values, [name]: value })
   }
 
-  const formSubmit = () => {
-    const newFriend = {
-      username: values.name.trim(),
-      email: values.email.trim(),
-      password: values.password.trim(),
-      termsOfService: values.termsOfService === true
-    }
-    // 🔥 STEP 8- POST NEW FRIEND USING HELPER
-    postUsers(values);
-  }
-
-  useEffect(() => {
-    Schema.isValid(values).then(valid => setDisabled(!valid));
-  }, [values])
+  // useEffect(() => {
+  //   Schema.isValid(values).then(valid => setDisabled(!valid));
+  // }, [values])
 
   return (
     <div className="App">
@@ -75,7 +64,7 @@ function App() {
         change={inputPoof}
         errors={errors}
         submit={postUsers}
-        disabled={disabled}
+        // disabled={disabled}
       />
       {users.map((u, index) => (
         <div id={index}>
